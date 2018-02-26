@@ -1,0 +1,74 @@
+/// Dependancies
+import React, { Component } from 'react';
+
+/// Database
+import fire from '../fire';
+
+// type="password"
+
+class Auth extends Component {
+
+    onSignIn = (e) => {
+        e.preventDefault();
+
+        // const txtEmail = this.refs.email.value;
+        // const txtPassword = this.refs.password.value;
+
+        let txtEmail = this.refs.email.value;
+        let txtPassword = this.refs.password.value;
+
+        console.log("E: "+ txtEmail + " P: " + txtPassword);
+        /*
+        const email = txtEmail.value;
+        const pass = txtPassword.value;
+        const auth = fire.fireAuth;
+
+        console.log("Email: " + email + " Pass: " + pass);
+
+        /// Sign in
+        const promise = auth.signInWithEmailAndPassword(email, pass);
+        promise.catch(e => console.log(e.message));
+        */
+    }
+
+    onSignUp = (e) => {
+        //e.preventDefault();
+
+        const txtEmail = this.refs.email;
+        const txtPassword = this.refs.password;
+
+        const email = txtEmail.value;
+        const pass = txtPassword.value;
+        const auth = fire.fireAuth;
+
+        console.log("Email: " + email + " Pass: " + pass);
+
+        /// Sign in
+        const promise = auth.createUserWithEmailAndPassword(email, pass);
+        promise.catch(e => console.log(e.message));
+    }
+
+    signOut() {
+        fire.fireAuth.signOut();
+    }
+
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.onSignIn.bind(this)} >
+                    <input type="text" ref="email" />
+                    <input type="text" ref="password" />
+                    <input type="submit" value="Sign in" />
+                </form>
+                <form onSubmit={this.onSignUp.bind(this)} >
+                    <input type="email" ref="email" />
+                    <input type="password" ref="password" />
+                    <input type="submit" value="Sign up" />
+                </form>
+                <button onClick={this.signOut} >Sign out</button>
+            </div>
+        );
+    }
+}
+
+export default Auth;

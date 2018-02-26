@@ -1,0 +1,103 @@
+/// Dependancies
+import React, { Component } from 'react';
+
+/// Database
+import fire from '../fire';
+
+// type="password"
+
+class Auth extends Component {
+
+    onSignIn = (e) => {
+        //e.preventDefault();
+
+        /*
+        let txtEmail = this.refs._email;
+        let txtPassword = this.refs._password;
+
+        const email = txtEmail.value;
+        const pass = txtPassword.value;
+        */
+        const email = document.getElementById("emailId1").value;
+        const pass = document.getElementById("passwordId1").value;
+
+        const auth = fire.fireAuth;
+
+        /// Sign in
+        const promise = auth.signInWithEmailAndPassword(email, pass);
+        promise.catch(e => alert(e.message));
+    }
+
+    onSignUp = (e) => {
+        //e.preventDefault();
+
+        /*
+        const txtEmail = this.refs.email;
+        const txtPassword = this.refs.password;
+
+        const email = txtEmail.value;
+        const pass = txtPassword.value;
+        */
+        const email = document.getElementById("emailId2").value;
+        const pass = document.getElementById("passwordId2").value;
+        alert(email + " " + pass)
+
+        const auth = fire.fireAuth;
+
+        /// Sign Up
+        const promise = auth.createUserWithEmailAndPassword(email, pass);
+        promise.catch(e => alert(e.message));
+    }
+
+    signOut() {
+        fire.fireAuth.onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                alert("Signing out");
+                fire.fireAuth.signOut();
+            } else {
+                alert("You can't signout when you're not signed in");
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <div>
+                    <input type="email" id="emailId1" />
+                    <input type="password" id="passwordId1" />
+                    <button onClick={this.onSignIn.bind(this)} >Sign in </button>
+                </div>
+                <div>
+                    <input type="email" id="emailId2" />
+                    <input type="password" id="passwordId2" />
+                    <button onClick={this.onSignUp.bind(this)} >Sign up </button>
+                </div>
+                <button onClick={this.signOut} >Sign out</button>
+            </div>
+        );
+    }
+}
+
+export default Auth;
+
+/*
+render() {
+    return (
+        <div>
+            <form onSubmit={this.onSignIn.bind(this)} >
+                <input type="email" ref="_email" />
+                <input type="password" ref="_password" />
+                <input type="submit" value="Sign in" />
+            </form>
+            <form onSubmit={this.onSignUp.bind(this)} >
+                <input type="email" ref="email" />
+                <input type="password" ref="password" />
+                <input type="submit" value="Sign up" />
+            </form>
+            <button onClick={this.signOut} >Sign out</button>
+        </div>
+    );
+}
+}
+*/

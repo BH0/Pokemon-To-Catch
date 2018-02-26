@@ -1,0 +1,29 @@
+p.pokemon-item {
+    width: 100px;
+    color: blue;
+}
+
+p.pokemon-item strong {
+    font-weight: bold;
+    color: red;
+}
+
+p.pokemon-item img {
+    width: 100px;
+    height: 100px;
+}
+
+.name {
+    color: purple;
+}
+.area {
+    color: green;
+}
+.type {
+    color: grey;
+}
+
+.warning {
+    color: red;
+    background-color: orange;
+}
